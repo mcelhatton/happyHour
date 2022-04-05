@@ -1,0 +1,32 @@
+.container {
+  position: -webkit-sticky;
+  position: sticky;
+}
+
+.button {
+  position: fixed;
+  clear: none;
+}
+
+.heading {
+  text-align: center;
+}
+
+.paragraph {
+  text-align: center;
+}
+
+.button-2 {
+  position: absolute;
+  left: 500px;
+  right: auto;
+  float: none;
+  clear: none;
+  border-radius: 9px;
+  text-align: center;
+}
+
+.image {
+  position: static;
+  text-align: left;
+}
