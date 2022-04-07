@@ -1,5 +1,4 @@
 
-<<<<<<< HEAD
 // the movie DB api key
 const movieApiKey = '42dbe956de7a0a7cd46f2c0cd6110ac2';
 
@@ -36,31 +35,9 @@ const genreApiUrl = 'https://api.themoviedb.org/3/genre/movie/list?api_key=42dbe
     console.log(selected);
     let selection = selected.replace(/\D/g,'');
     fetchMovies(selection);
-=======
-// OMDb API mobie urls / variables
-let searchValue = 'type=movie';
-const movieApiKey = 'a0d72e1';
-const movieApiUrl = `https://www.omdbapi.com/?${searchValue}&&apikey=${movieApiKey}`;
-const moviePosterUrl = `https://img.omdbapi.com/?apikey=${movieApiKey}&`;
-// trivia urls / variables
-const triviaApiUrl = `https://opentdb.com/api.php?amount=10&category=18&difficulty=medium&type=multiple`;
-const triviaCategoryLookupUrl = `https://opentdb.com/api_category.php`;
-
-fetch(triviaCategoryLookupUrl).then(function(response) {
-  response.json().then(function(data) {
-   // console.log(data);
-  });
-});
-
-fetch(triviaApiUrl).then(function(response) {
-  response.json().then(function(data) {
-   // console.log(data);
->>>>>>> addf0f91745c92d6cfee91c31c02554eff42d0bc
   });
 
-<<<<<<< HEAD
   function fetchMovies(selection) {
-=======
 
 
 // Drinks code START
@@ -119,7 +96,6 @@ $('#field-2').change(function(){
 // END of drinks code
 
 // select category
->>>>>>> addf0f91745c92d6cfee91c31c02554eff42d0bc
 
     const movieApiUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${movieApiKey}&with_genres=${selection}`;
 
