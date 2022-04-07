@@ -1,27 +1,28 @@
 
-// OMDb API mobie urls / variables
-let searchValue = 't=matrix';
-const movieApiKey = 'a0d72e1';
-const movieApiUrl = `https://www.omdbapi.com/?${searchValue}&&apikey=${movieApiKey}`;
 
-//const moviePosterUrl = `https://img.omdbapi.com/?apikey=${movieApiKey}&`;
+const genereApiUrl = 'https://api.themoviedb.org/3/genre/movie/list?api_key=42dbe956de7a0a7cd46f2c0cd6110ac2&language=en-US'
 
 
-let musicGenreUrl ='https://binaryjazz.us/wp-json/genrenator/v1/genre/';
+
+const movieApiKey = '42dbe956de7a0a7cd46f2c0cd6110ac2'
+//const movieApiUrl = 'https://api.themoviedb.org/3/movie/76341?api_key=42dbe956de7a0a7cd46f2c0cd6110ac2'
+
+// Url to get genere list and id's
+const movieApiUrl = 'https://api.themoviedb.org/3/discover/movie?api_key=42dbe956de7a0a7cd46f2c0cd6110ac2&with_genres=28' 
 
 
 // the movie db api
 //const movieApiKey = '42dbe956de7a0a7cd46f2c0cd6110ac2'
 //const movieApiUrl = 'https://api.themoviedb.org/10/movie/550?api_key=42dbe956de7a0a7cd46f2c0cd6110ac2'
 
-
-// trivia urls / variables
-const triviaApiUrl = `https://opentdb.com/api.php?amount=10&category=18&difficulty=medium&type=multiple`;
-const triviaCategoryLookupUrl = `https://opentdb.com/api_category.php`;
-
-fetch(musicGenreUrl).then(function(response) {
+fetch(genereApiUrl).then(function(response) {
   response.json().then(function(data) {
     console.log(data);
     }); 
   });
 
+  fetch(movieApiUrl).then(function(response) {
+    response.json().then(function(data) {
+      console.log(data);
+      }); 
+    });
