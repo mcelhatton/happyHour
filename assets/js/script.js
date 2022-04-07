@@ -20,6 +20,10 @@ fetch(triviaApiUrl).then(function(response) {
   });
 });
 
+
+
+// Drinks code START
+
 drinksData = [
   {
     'name': "Brandy",
@@ -39,48 +43,39 @@ drinksData = [
   },{
     'name': "Whiskey",
     'url': 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=Whiskey',
+  },{
+    'name': "Vodka",
+    'url': 'www.thecocktaildb.com/api/json/v1/1/filter.php?i=Vodka',
   }
 ]
 
-// Drinks api
-
+// Create option elements in dropdown for each spirit
 for (i in drinksData){
-
   drinkName = drinksData[i].name
+  url  = drinksData[i].url 
 
-  varName = drinkName.toLowerCase() + "Url"
-  console.log(varName)
-  varName  = drinksData[i].url 
- 
-  var option = document.createElement('option');
-
-  var dropdownOption = $("<option>")
-    .attr('value', drinkName.toLowerCase())
+  option = document.createElement('option');
+  dropdownOption = $("<option>")
+    .attr('value', drinkName)
     .text(drinkName);
 
-  $('#drink-form-select').append(dropdownOption);
+  $('#field-2').append(dropdownOption);
+  
 }
 
-$('#drink-form-select').on("click", "option", function () {
- console.log("hi")
-});
+// When option is selected, call corresponding api url and randomly select drink
+$('#field-2').change(function(){
+  const selected = drinksData.find( ({ name }) => name === $(this).val() );
+  url = selected.url
+    fetch(url).then(function(response) {
+      response.json().then(function(data) {
+        selectedDrink = data.drinks[Math.floor(Math.random() * data.drinks.length)];
+        console.log(selectedDrink)
+      });
+    });
+})
 
-
-// fetch(brandyUrl).then(function(response) {
-//   response.json().then(function(data) {
-//   //console.log(data);
-//   });
-// });
-
-// $('#drink-form').on("click", "p", function () {
-//   var text = $(this).text().trim();
-
-//   var textInput = $("<textarea>").addClass("form-control col-9").val(text);
-//   $(this).replaceWith(textInput);
-//   textInput.trigger("focus");
-
-// });
-
+// END of drinks code
 
 // select category
 
