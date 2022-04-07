@@ -2,6 +2,8 @@
 // the movie DB api key
 const movieApiKey = '42dbe956de7a0a7cd46f2c0cd6110ac2';
 
+// start movie api code //////////////////////////////////
+
 // on page load fetch genre and load into dropdown list
 $( document ).ready(fetchGenres);
 
@@ -38,7 +40,15 @@ const genreApiUrl = 'https://api.themoviedb.org/3/genre/movie/list?api_key=42dbe
   });
 
   function fetchMovies(selection) {
+    const movieApiUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${movieApiKey}&with_genres=${selection}`;
 
+    fetch(movieApiUrl).then(function(response) {
+      response.json().then(function(data) {
+        console.log(data);
+        }); 
+      });
+  }
+// END movie api code //////////////////////////////////
 
 // Drinks code START
 
@@ -95,13 +105,3 @@ $('#field-2').change(function(){
 
 // END of drinks code
 
-// select category
-
-    const movieApiUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${movieApiKey}&with_genres=${selection}`;
-
-    fetch(movieApiUrl).then(function(response) {
-      response.json().then(function(data) {
-        console.log(data);
-        }); 
-      });
-  }
