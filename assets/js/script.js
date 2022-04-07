@@ -1,28 +1,49 @@
 
+// the movie DB api key
+const movieApiKey = '42dbe956de7a0a7cd46f2c0cd6110ac2';
 
-const genereApiUrl = 'https://api.themoviedb.org/3/genre/movie/list?api_key=42dbe956de7a0a7cd46f2c0cd6110ac2&language=en-US'
+// on page load fetch genre and load into dropdown list
+$( document ).ready(fetchGenres);
 
+function fetchGenres() {
 
+const genreApiUrl = 'https://api.themoviedb.org/3/genre/movie/list?api_key=42dbe956de7a0a7cd46f2c0cd6110ac2&language=en-US';
 
-const movieApiKey = '42dbe956de7a0a7cd46f2c0cd6110ac2'
-//const movieApiUrl = 'https://api.themoviedb.org/3/movie/76341?api_key=42dbe956de7a0a7cd46f2c0cd6110ac2'
+    fetch(genreApiUrl).then(function(response) {
+      response.json().then(function(data) {
+        console.log(data);
+        
+          loadSelect(data);
+        
+        }); 
+      });
+  }
+  
+  function loadSelect(data) {
+    let id = data.genres[1].id;
+    let name = data.genres[1].name;
 
-// Url to get genere list and id's
-const movieApiUrl = 'https://api.themoviedb.org/3/discover/movie?api_key=42dbe956de7a0a7cd46f2c0cd6110ac2&with_genres=28' 
+    for (i = 0; i < data.genres.length; i++) {
+      id = data.genres[i].id;
+      name = data.genres[i].name;
+      $('#field').append(`<option>${name} : ${id}</option>`);
+    }
+  }
 
-
-// the movie db api
-//const movieApiKey = '42dbe956de7a0a7cd46f2c0cd6110ac2'
-//const movieApiUrl = 'https://api.themoviedb.org/10/movie/550?api_key=42dbe956de7a0a7cd46f2c0cd6110ac2'
-
-fetch(genereApiUrl).then(function(response) {
-  response.json().then(function(data) {
-    console.log(data);
-    }); 
+  $('#field').change(function(){
+    const selected = $('#field').val();
+    console.log(selected);
+    let selection = selected.replace(/\D/g,'');
+    fetchMovies(selection);
   });
 
-  fetch(movieApiUrl).then(function(response) {
-    response.json().then(function(data) {
-      console.log(data);
-      }); 
-    });
+  function fetchMovies(selection) {
+
+    const movieApiUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${movieApiKey}&with_genres=${selection}`;
+
+    fetch(movieApiUrl).then(function(response) {
+      response.json().then(function(data) {
+        console.log(data);
+        }); 
+      });
+  }
