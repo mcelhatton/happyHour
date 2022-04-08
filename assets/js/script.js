@@ -7,6 +7,7 @@ $('#movie-section').hide();
 $('#drinks-section').hide();
 // on page load fetch genre and load into dropdown list
 $( document ).ready(fetchGenres);
+$( document ).ready(fetchRecipes);
 
 function fetchGenres() {
 
@@ -153,10 +154,25 @@ $('#field-2').change(function(){
 });
 
 
-
-
 // Save to local storage
 var saveResult = function () {
   localStorage.setItem("eventsArray", JSON.stringify(previousResults));
 
 };
+
+const recipeApiKey = 'aaa2f0547807454dbadffba65a6a4360';
+
+function fetchRecipes(){
+
+//const recipeApiUrl = `https://api.spoonacular.com/recipes/random?apiKey=${recipeApiKey}`;
+const recipeApiUrl = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${recipeApiKey}`;
+
+    fetch(recipeApiUrl).then(function(response) {
+      response.json().then(function(data) {
+        console.log(data);
+        
+          
+        
+        }); 
+      });
+  }
