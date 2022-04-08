@@ -3,7 +3,8 @@
 const movieApiKey = '42dbe956de7a0a7cd46f2c0cd6110ac2';
 
 // start movie api code //////////////////////////////////
-
+$('#movie-section').hide();
+$('#drinks-section').hide();
 // on page load fetch genre and load into dropdown list
 $( document ).ready(fetchGenres);
 
@@ -48,7 +49,7 @@ const genreApiUrl = 'https://api.themoviedb.org/3/genre/movie/list?api_key=42dbe
         let randomNumber = ~~(Math.random() * 10);
         let moviePoster = data.results[randomNumber].poster_path;
         let moviePosterUrl = `https://image.tmdb.org/t/p/w500${moviePoster}`;
-        
+        $('#movie-section').show();
         $('#movie-image').attr('src', moviePosterUrl);
         $('#movie-title').text(data.results[randomNumber].title);
         $('#overview').text(data.results[randomNumber].overview);
@@ -144,6 +145,7 @@ previousResults = []
 $('#field-2').change(function(){
   const selected = $('#field-2').val();
   localStorage.setItem('Selected', selected);
+  $('#drinks-section').show();
   console.log(selected);
   result = {};
   getDrink();
