@@ -112,9 +112,29 @@ function getDrink(){
 // END of drinks code
 
 
+previousResults = {}
+
 // When main button is clicked, serve up movie and drink suggestions
 $('#main-button').click(function(){
 
   getDrink()
 
+
+  // Save text when clicking save button
+  drink = $('#drink-title').text()
+
+  
+  saveEvents();
+
 })
+
+
+// Code for local storage
+
+
+
+// Save to local storage
+var saveEvents = function () {
+  localStorage.setItem("eventsArray", JSON.stringify(previousResults));
+
+};
