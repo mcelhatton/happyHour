@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="./assets/css/normalize.css">
     <link rel="stylesheet" href="./assets/css/mywebflow.css">
     <link rel="stylesheet" href="./assets/css/webflow.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 
     <title>Happy Hour</title>
   </head>
@@ -52,14 +53,20 @@
       </div>
     </div>
     <div class="w-row">
-      <div class="w-col w-col-6">
-        <img src="https://d3e54v103j8qbb.cloudfront.net/plugins/Basic/assets/placeholder.60f9b1840c.svg" loading="lazy" alt="">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.</p>
+      <div id="movie-section" class="w-col w-col-6">
+        <img id = "movie-image" src="https://d3e54v103j8qbb.cloudfront.net/plugins/Basic/assets/placeholder.60f9b1840c.svg" loading="lazy" alt="">
+        <h4 id="movie-title"></h4>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing</p>
       </div>
-      <div class="w-col w-col-6">
+      <div id="drinks-section" class="w-col w-col-6">
         <img id="drink-image" src="https://d3e54v103j8qbb.cloudfront.net/plugins/Basic/assets/placeholder.60f9b1840c.svg" loading="lazy" alt="" class="image">
         <h4 id="drink-title"></h4>
       </div>
+    </div>
+    <div id="previous-result">
+      <h4 id="previous-result-heading">Previous result</h4>
+      <p id="previous-result-movie"><i class="fas fa-film"></i></p>
+      <p id="previous-result-drink"><i class="fas fa-glass-whiskey"></i></p>
     </div>
 
 
