@@ -104,37 +104,40 @@ function getDrink(){
       $('#drink-image').attr('src', selectedDrink.strDrinkThumb); // replace image
       $('#drink-title').text(selectedDrink.strDrink); // replace drink name
 
+
+        // Save text when clicking save button
+
+          result['drink'] = $('#drink-title').text()
+          console.log(result)
+  
     });
   });
-
 }
+
+// function saveObjectForResult{
+
+// }
 
 // END of drinks code
 
 
-previousResults = {}
+
+previousResults = []
 
 // When main button is clicked, serve up movie and drink suggestions
 $('#main-button').click(function(){
-
+  result = {}
   getDrink()
 
-
-  // Save text when clicking save button
-  drink = $('#drink-title').text()
-
+  //saveResult();
   
-  saveEvents();
-
 })
 
-
-// Code for local storage
 
 
 
 // Save to local storage
-var saveEvents = function () {
+var saveResult = function () {
   localStorage.setItem("eventsArray", JSON.stringify(previousResults));
 
 };
