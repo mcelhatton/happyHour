@@ -7,7 +7,7 @@ $('#movie-section').hide();
 $('#drinks-section').hide();
 // on page load fetch genre and load into dropdown list
 $( document ).ready(fetchGenres);
-$( document ).ready(fetchRecipes);
+//$( document ).ready(fetchRecipes);
 
 function fetchGenres() {
 
@@ -162,17 +162,59 @@ var saveResult = function () {
 
 const recipeApiKey = 'aaa2f0547807454dbadffba65a6a4360';
 
+let recipeSearch = '';
+
 function fetchRecipes(){
 
 //const recipeApiUrl = `https://api.spoonacular.com/recipes/random?apiKey=${recipeApiKey}`;
-const recipeApiUrl = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${recipeApiKey}`;
 
+const recipeApiUrl = `https://api.spoonacular.com/recipes/search?query=${recipeSearch}&number=10&apiKey=${recipeApiKey}`;
+  console.log(recipeApiUrl);
     fetch(recipeApiUrl).then(function(response) {
       response.json().then(function(data) {
         console.log(data);
         
-          
+          loadRecipeSelect(data);
         
+        }); 
+      });
+  }
+
+  $('#recipeSearchBtn').on('click', function(){
+    recipeSearch = $('#recipeSearch').val();
+    fetchRecipes(recipeSearch);
+  });
+  
+  function loadRecipeSelect(data) {
+    
+    let recipeTitle = data.results.title;
+    let recipeID = data.results.id;
+
+    for (i = 0; i < data.results.length; i++) {
+      recipeTitle = data.results[i].title;
+      recipeID = data.results[i].id;
+      console.log(recipeTitle,recipeID);
+      $('#field-3').append(`<option>${recipeTitle} : ${recipeID}</option>`);
+    }
+  }
+
+  $('#field-3').change(function(){
+    const selected = $('#field-3').val();
+    localStorage.setItem('Selected', selected);
+    console.log(selected);
+    let selection = selected.replace(/\D/g,'');
+    fetchRecipeDetails(selection);
+  });
+ 
+  function fetchRecipeDetails(selection) {
+    const recipeDetailUrl = `https://api.spoonacular.com/recipes/${selection}/information?apiKey=${recipeApiKey}`;
+
+    fetch(recipeDetailUrl).then(function(response) {
+      response.json().then(function(data) {
+        
+        $('#recipe-image').attr('src', data.image); // replace image
+        $('#recipe-title').text(data.title);
+        console.log(data);
         }); 
       });
   }
