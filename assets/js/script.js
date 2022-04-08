@@ -45,12 +45,13 @@ const genreApiUrl = 'https://api.themoviedb.org/3/genre/movie/list?api_key=42dbe
 
     fetch(movieApiUrl).then(function(response) {
       response.json().then(function(data) {
-        let moviePoster = data.results[0].poster_path;
+        let randomNumber = ~~(Math.random() * 10);
+        let moviePoster = data.results[randomNumber].poster_path;
         let moviePosterUrl = `https://image.tmdb.org/t/p/w500${moviePoster}`;
         
         $('#movie-image').attr('src', moviePosterUrl);
-        $('#movie-title').text(data.results[0].title);
-        $('#overview').text(data.results[0].overview);
+        $('#movie-title').text(data.results[randomNumber].title);
+        $('#overview').text(data.results[randomNumber].overview);
         console.log(data);
         }); 
       });
@@ -132,13 +133,22 @@ function getDrink(){
 previousResults = []
 
 // When main button is clicked, serve up movie and drink suggestions
-$('#main-button').click(function(){
-  result = {}
-  getDrink()
+//$('#main-button').click(function(){
+ // result = {}
+ // getDrink()
 
   //saveResult();
   
-})
+//})
+
+$('#field-2').change(function(){
+  const selected = $('#field-2').val();
+  localStorage.setItem('Selected', selected);
+  console.log(selected);
+  result = {};
+  getDrink();
+  
+});
 
 
 
