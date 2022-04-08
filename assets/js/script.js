@@ -58,7 +58,7 @@ drinksData = [
     'url': 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=Brandy',
   },{
     'name': "Gin",
-    'url': 'https://wwww.thecocktaildb.com/api/json/v1/1/filter.php?i=Gin',
+    'url': 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=Gin',
   },{
     'name': "Mezcal",
     'url': 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=Mezcal',
@@ -73,14 +73,13 @@ drinksData = [
     'url': 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=Whiskey',
   },{
     'name': "Vodka",
-    'url': 'www.thecocktaildb.com/api/json/v1/1/filter.php?i=Vodka',
+    'url': 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=Vodka',
   }
 ]
 
 // Create option elements in dropdown for each spirit
 for (i in drinksData){
   drinkName = drinksData[i].name
-  url  = drinksData[i].url 
 
   option = document.createElement('option');
   dropdownOption = $("<option>")
@@ -91,17 +90,31 @@ for (i in drinksData){
   
 }
 
-// When option is selected, call corresponding api url and randomly select drink
-$('#field-2').change(function(){
-  const selected = drinksData.find( ({ name }) => name === $(this).val() );
+function getDrink(){
+
+  const selected = drinksData.find( ({ name }) => name === $('#field-2').val() );
   url = selected.url
-    fetch(url).then(function(response) {
-      response.json().then(function(data) {
-        selectedDrink = data.drinks[Math.floor(Math.random() * data.drinks.length)];
-        console.log(selectedDrink)
-      });
+
+  fetch(url).then(function(response) {
+    response.json().then(function(data) {
+
+      selectedDrink = data.drinks[Math.floor(Math.random() * data.drinks.length)];
+      console.log(selectedDrink)
+
+      $('#drink-image').attr('src', selectedDrink.strDrinkThumb); // replace image
+      $('#drink-title').text(selectedDrink.strDrink); // replace drink name
+
     });
-})
+  });
+
+}
 
 // END of drinks code
 
+
+// When main button is clicked, serve up movie and drink suggestions
+$('#main-button').click(function(){
+
+  getDrink()
+
+})
