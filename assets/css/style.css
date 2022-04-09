@@ -1,0 +1,35 @@
+header{
+    margin-bottom: 1em;
+}
+
+
+
+
+#previous-result{
+    display: none;
+}
+
+/*Color CSS*/
+body{
+   background-color: #004953;
+}
+
+.movie{
+    background-color: ;
+}
+
+/* Fonts*/
+.title{
+    font-family: 'Jost', sans-serif;
+    color: #ff8000;
+    font-size: 125px;
+    
+}
+
+.paragraph{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 40px;
+    line-height: 1.5;
+}
+
+

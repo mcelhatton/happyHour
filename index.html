@@ -6,25 +6,35 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="./assets/css/style.css">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="./assets/css/normalize.css">
     <link rel="stylesheet" href="./assets/css/mywebflow.css">
     <link rel="stylesheet" href="./assets/css/webflow.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <!-- Custom CSS at bottom -->
+    <link rel="stylesheet" href="./assets/css/style.css">
+
+    <!-- Google Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri&family=Jost:wght@600&family=Montserrat:ital,wght@0,400;1,200&family=Oxygen&family=Prompt:ital,wght@1,300&family=Teko&display=swap" rel="stylesheet">
 
     <title>Happy Hour</title>
   </head>
   <body>
-    <h1 class="heading">Title here</h1>
-    <p class="paragraph">[Copy here - Get your night started righ with a drink and movie suggestion]</p>
-    <div>
-      <div class="w-row">
-        <div class="w-col w-col-6">
+    <header>
+      <h1 class="text-5xl text-center mb-3 font-bold title">Date Night!</h1>
+      <p class="paragraph">Get your night started right!<br> Who is up for a movie, drink and dinner?</p>
+      <button id="main-button">Click to serve up suggestions</button>
+    </header>
+      <!-- Dropdown boxes -->
+      <div class="flex flex-row flex-wrap justify-center gap-10">
+        <!-- Movie select -->
+        <div class="w-full md:w-1/4 ">
           <div class="w-form">
-            <form id="music-form" name="music-form" data-name="Music Form" method="get"><select id="field" name="field" data-name="Field" class="w-select">
-                <option value="">Select one...</option>
-                <option value="First">First choice</option>
-                <option value="Second">Second choice</option>
-                <option value="Third">Third choice</option>
+            <form id="movie-form" name="movie-form" data-name="movie Form" method="get"><select id="field" name="field" data-name="Field" class="w-select">
+              <option>Please select a movie genre</option>
               </select></form>
             <div class="w-form-done">
               <div>Thank you! Your submission has been received!</div>
@@ -34,14 +44,14 @@
             </div>
           </div>
         </div>
-        <div class="w-col w-col-6">
+        <!-- Drink select -->
+        <div class="w-full md:w-1/4">
           <div class="w-form">
-            <form id="drink-form" name="drink-form" data-name="Drink Form" method="get"><select id="field-2" name="field-2" data-name="Field 2" class="w-select">
-                <option value="">Select one...</option>
-                <option value="First">First choice</option>
-                <option value="Second">Second choice</option>
-                <option value="Third">Third choice</option>
-              </select></form>
+            <form id="drink-form" name="drink-form" data-name="Drink Form" method="get">
+              <select id="field-2" name="field-2" data-name="Field 2" class="w-select">
+                <option value="">Please select a drink</option>
+              </select>
+            </form>
             <div class="w-form-done">
               <div>Thank you! Your submission has been received!</div>
             </div>
@@ -50,21 +60,59 @@
             </div>
           </div>
         </div>
+        <!-- Dinner select -->
+        <div class="w-full md:w-1/4">
+          <div class="w-form">
+            
+            <div class="w-form">
+              <form id="recipe-form" name="recipe-form" data-name="Recipe Form" method="get">
+                <select id="field-3" name="field-3" data-name="Field 3" class="w-select">
+                  <label class="search-box space-x-5">
+                    <input id="recipeSearch" name="recipeSearch" type="text" placeholder="Search..">
+                    <button id="recipeSearchBtn" class="btn btn-primary" >Search</button>
+                  </label>
+                  
+                </select>
+              </form>
+              <div class="w-form-done">
+                <div>Thank you! Your submission has been received!</div>
+              </div>
+              <div class="w-form-fail">
+                <div>Oops! Something went wrong while submitting the form.</div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="w-row">
-      <div class="w-col w-col-6"><img src="https://d3e54v103j8qbb.cloudfront.net/plugins/Basic/assets/placeholder.60f9b1840c.svg" loading="lazy" alt="">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.</p>
+    <!-- Main Content -->
+    <div id="movieAndDrinkDetails" class="flex grid gap-5 grid-cols-3 mx-10 movie">
+      <div id="movie-section" class="">
+        <img id = "movie-image" src="" loading="lazy" alt="movie poster">
+        <h4 id="movie-title"></h4>
+        <p id="overview"></p>
       </div>
-      <div class="w-col w-col-6"><img src="https://d3e54v103j8qbb.cloudfront.net/plugins/Basic/assets/placeholder.60f9b1840c.svg" loading="lazy" alt="" class="image">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.</p>
+      <div id="drinks-section" class="">
+        <img id="drink-image" src="" loading="lazy" alt="" class="image">
+        <h4 id="drink-title"></h4>
+      </div>
+
+      <div id="recipe-section" class="">
+        <img id = "recipe-image" src="" loading="lazy" alt="">
+        <h4 id="recipe-title"></h4>
+        <p id="recipeDetails"></p>
+      </div>
+      <div id="previous-result">
+        <h4 id="previous-result-heading">Previous result:</h4>
+        <p id="previous-result-movie"><i class="fas fa-film"></i></p>
+        <p id="previous-result-drink"><i class="fas fa-glass-whiskey"></i></p>
       </div>
     </div>
 
 
-  
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="./assets/js/script.js"></script>
     
   </body>
