@@ -187,8 +187,8 @@ const recipeApiUrl = `https://api.spoonacular.com/recipes/search?query=${recipeS
   
   function loadRecipeSelect(data) {
     
-    let recipeTitle = data.results.title;
-    let recipeID = data.results.id;
+    let recipeTitle ='';
+    let recipeID = '';
 
     for (i = 0; i < data.results.length; i++) {
       recipeTitle = data.results[i].title;
