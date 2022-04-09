@@ -218,3 +218,4 @@ const recipeApiUrl = `https://api.spoonacular.com/recipes/search?query=${recipeS
         }); 
       });
   }
+  
