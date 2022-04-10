@@ -1,0 +1,139 @@
+.heading {
+  text-align: center;
+}
+
+.paragraph {
+  text-align: center;
+}
+
+.text-field {
+  display: inline-block;
+  box-shadow: 1px 1px 3px 0 #000;
+}
+
+.button {
+  margin-left: 10px;
+  box-shadow: 1px 1px 3px 0 #000;
+  text-align: left;
+}
+
+.select-field {
+  box-shadow: 1px 1px 3px 0 #000;
+}
+
+.select-field-2 {
+  box-shadow: 1px 1px 3px 0 #000;
+}
+
+.select-field-3 {
+  box-shadow: 1px 1px 3px 0 #000;
+}
+
+.image {
+  margin-top: 52px;
+}
+
+.image-2 {
+  margin-top: 52px;
+  mix-blend-mode: normal;
+}
+
+.heading-2 {
+  margin-left: 0px;
+}
+
+.modalwrapper {
+  position: fixed;
+  left: 0%;
+  top: 0%;
+  right: 0%;
+  bottom: 0%;
+  width: auto;
+  height: 100%;
+  max-height: none;
+  padding-top: 80px;
+  background-color: rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+
+.selectionwrapper {
+  width: 450px;
+  height: auto;
+  max-height: 100%;
+  max-width: 100%;
+  margin: auto;
+  padding: 20px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #faab36;
+  border-radius: 18px;
+  background-color: #f78104;
+  box-shadow: 4px 4px 3px 0 #9e9e9e;
+}
+
+.section {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.submit-button {
+  border: 0px solid #000;
+  border-radius: 9px;
+  background-color: #fd5901;
+  box-shadow: 1px 1px 3px 0 #000;
+}
+
+.heading-3 {
+  color: #fff;
+}
+
+.text-block {
+  color: #fff;
+}
+
+.select-field-4 {
+  color: #fd5901;
+}
+
+.select-field-5 {
+  color: #fd5901;
+}
+
+.text-field-2 {
+  color: #fd5901;
+}
+
+.form {
+  padding-top: 10px;
+}
+
+@media screen and (max-width: 479px) {
+  .column {
+    margin-top: 10px;
+  }
+
+  .column-2 {
+    margin-top: 20px;
+  }
+
+  .column-3 {
+    margin-top: 10px;
+  }
+
+  .column-4 {
+    padding-bottom: 10px;
+  }
+}
