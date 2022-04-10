@@ -30,20 +30,21 @@ const genreApiUrl = 'https://api.themoviedb.org/3/genre/movie/list?api_key=42dbe
     for (i = 0; i < data.genres.length; i++) {
       id = data.genres[i].id;
       name = data.genres[i].name;
-      $('#field').append(`<option>${name} : ${id}</option>`);
+      $('#field').append(`<option id="${id}">${name}</option>`);
     }
   }
 
   $('#field').change(function(){
-    const selected = $('#field').val();
+    //const selected = $('#field').val().attr('id');
+    let selected = $(this).find('option:selected').attr('id');
     localStorage.setItem('Selected', selected);
     console.log(selected);
-    let selection = selected.replace(/\D/g,'');
-    fetchMovies(selection);
+    //let selection = selected.replace(/\D/g,'');
+    fetchMovies(selected);
   });
 
-  function fetchMovies(selection) {
-    const movieApiUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${movieApiKey}&with_genres=${selection}`;
+  function fetchMovies(selected) {
+    const movieApiUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${movieApiKey}&with_genres=${selected}`;
 
     fetch(movieApiUrl).then(function(response) {
       response.json().then(function(data) {
@@ -186,28 +187,33 @@ const recipeApiUrl = `https://api.spoonacular.com/recipes/search?query=${recipeS
   });
   
   function loadRecipeSelect(data) {
+<<<<<<< HEAD
     
     let recipeTitle ='';
     let recipeID = '';
+=======
+    $('#field-3').empty();
+    let recipeTitle = data.results.title;
+    let recipeID = data.results.id;
+>>>>>>> api-recipe
 
     for (i = 0; i < data.results.length; i++) {
       recipeTitle = data.results[i].title;
       recipeID = data.results[i].id;
       console.log(recipeTitle,recipeID);
-      $('#field-3').append(`<option>${recipeTitle} : ${recipeID}</option>`);
+      $('#field-3').append(`<option id="${recipeID}">${recipeTitle}</option>`);
     }
   }
 
   $('#field-3').change(function(){
-    const selected = $('#field-3').val();
+    let selected = $(this).find('option:selected').attr('id');
     localStorage.setItem('Selected', selected);
     console.log(selected);
-    let selection = selected.replace(/\D/g,'');
-    fetchRecipeDetails(selection);
+    fetchRecipeDetails(selected);
   });
  
-  function fetchRecipeDetails(selection) {
-    const recipeDetailUrl = `https://api.spoonacular.com/recipes/${selection}/information?apiKey=${recipeApiKey}`;
+  function fetchRecipeDetails(selected) {
+    const recipeDetailUrl = `https://api.spoonacular.com/recipes/${selected}/information?apiKey=${recipeApiKey}`;
 
     fetch(recipeDetailUrl).then(function(response) {
       response.json().then(function(data) {
