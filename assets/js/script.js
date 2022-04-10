@@ -32,7 +32,7 @@ $( document ).ready(fetchGenres);
 $('#wf-form-submitForm').submit(function(event){
   event.preventDefault();
 
-  // hide modal show suggestions
+  // hide modal show / suggestions
   
   headerEl.show();
   heroEl.show();
@@ -85,18 +85,7 @@ const genreApiUrl = 'https://api.themoviedb.org/3/genre/movie/list?api_key=42dbe
     }
   }
 
-  /*
-  $('#field').change(function(){
-    //const selected = $('#field').val().attr('id');
-    let selected = $(this).find('option:selected').attr('id');
-    localStorage.setItem('Selected', selected);
-    console.log(selected);
-    //let selection = selected.replace(/\D/g,'');
-    fetchMovies(selected);
-  });
-  */
-
-
+/////// FETCH MOVIE SELECTION
   function fetchMovies(selected) {
     const movieApiUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${movieApiKey}&with_genres=${selected}`;
 
@@ -173,10 +162,6 @@ function getDrink(){
   });
 }
 
-// function saveObjectForResult{
-
-// }
-
 // END of drinks code
 
 
@@ -192,17 +177,6 @@ previousResults = []
   
 //})
 
-$('#field-2').change(function(){
-  const selected = $('#field-2').val();
-  localStorage.setItem('Selected', selected);
-  $('#drinks-section').show();
-  console.log(selected);
-  result = {};
-  getDrink();
-  
-});
-
-
 // Save to local storage
 var saveResult = function () {
   localStorage.setItem("eventsArray", JSON.stringify(previousResults));
@@ -210,12 +184,7 @@ var saveResult = function () {
 };
 
 
-
-let recipeSearch = '';
-
 function fetchRecipes(){
-
-//const recipeApiUrl = `https://api.spoonacular.com/recipes/random?apiKey=${recipeApiKey}`;
 
 const recipeApiUrl = `https://api.spoonacular.com/recipes/search?query=${recipeSearch}&number=10&apiKey=${recipeApiKey}`;
   console.log(recipeApiUrl);
@@ -230,27 +199,7 @@ const recipeApiUrl = `https://api.spoonacular.com/recipes/search?query=${recipeS
         }); 
       });
   }
-  /*
-  function loadRecipeSelect(data) {
-    let recipeTitle = data.results.title;
-    let recipeID = data.results.id;
-
-    for (i = 0; i < data.results.length; i++) {
-      recipeTitle = data.results[i].title;
-      recipeID = data.results[i].id;
-      console.log(recipeTitle,recipeID);
-      $('#field-3').append(`<option id="${recipeID}">${recipeTitle}</option>`);
-    }
-  }
-  */
-
-  $('#field-3').change(function(){
-    let selected = $(this).find('option:selected').attr('id');
-    localStorage.setItem('Selected', selected);
-    console.log(selected);
-    fetchRecipeDetails(selected);
-  });
- 
+ ////// FETCH RECIPE DETAILS
   function fetchRecipeDetails(randomRecipe) {
     const recipeDetailUrl = `https://api.spoonacular.com/recipes/${randomRecipe}/information?apiKey=${recipeApiKey}`;
 
