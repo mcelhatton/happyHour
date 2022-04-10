@@ -13,9 +13,13 @@ let liquorSelect = $('#liquorSelect');
 let recipeSelect = $('#recipeSelect');
 
 
-// api keys
+///////// API KEYS
+
 // the movie DB api key
 const movieApiKey = '42dbe956de7a0a7cd46f2c0cd6110ac2';
+
+// recipe api key
+const recipeApiKey = 'aaa2f0547807454dbadffba65a6a4360';
 
 
 /// hide header, container and footer elements
@@ -29,15 +33,17 @@ $('#wf-form-submitForm').submit(function(event){
   event.preventDefault();
 
   // hide modal show suggestions
-  modalEl.hide();
-  modalSelectEl.hide();
+  
   headerEl.show();
   heroEl.show();
   containerEl.show();
   footerEl.show();
+  modalEl.hide();
+  modalSelectEl.hide();
 
   moveGenreSelect.val();
   recipeSelect.val();
+
 
   // fetch movie selection from form submit 
   fetchMovies(movieGenreSelect);
@@ -203,7 +209,7 @@ var saveResult = function () {
 
 };
 
-const recipeApiKey = 'aaa2f0547807454dbadffba65a6a4360';
+
 
 let recipeSearch = '';
 
@@ -217,18 +223,15 @@ const recipeApiUrl = `https://api.spoonacular.com/recipes/search?query=${recipeS
       response.json().then(function(data) {
         console.log(data);
         
-          loadRecipeSelect(data);
+        let randomNumber = ~~(Math.random() * 10);
+        let randomRecipe = data.results[randomNumber].id;
+        fetchRecipeDetails(randomRecipe);
         
         }); 
       });
   }
-
-  $('#recipeSearchBtn').on('click', function(){
-    
-  });
-  
+  /*
   function loadRecipeSelect(data) {
-    $('#field-3').empty();
     let recipeTitle = data.results.title;
     let recipeID = data.results.id;
 
@@ -239,6 +242,7 @@ const recipeApiUrl = `https://api.spoonacular.com/recipes/search?query=${recipeS
       $('#field-3').append(`<option id="${recipeID}">${recipeTitle}</option>`);
     }
   }
+  */
 
   $('#field-3').change(function(){
     let selected = $(this).find('option:selected').attr('id');
@@ -247,8 +251,8 @@ const recipeApiUrl = `https://api.spoonacular.com/recipes/search?query=${recipeS
     fetchRecipeDetails(selected);
   });
  
-  function fetchRecipeDetails(selected) {
-    const recipeDetailUrl = `https://api.spoonacular.com/recipes/${selected}/information?apiKey=${recipeApiKey}`;
+  function fetchRecipeDetails(randomRecipe) {
+    const recipeDetailUrl = `https://api.spoonacular.com/recipes/${randomRecipe}/information?apiKey=${recipeApiKey}`;
 
     fetch(recipeDetailUrl).then(function(response) {
       response.json().then(function(data) {
