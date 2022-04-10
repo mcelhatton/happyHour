@@ -256,9 +256,15 @@ const recipeApiUrl = `https://api.spoonacular.com/recipes/search?query=${recipeS
 
     fetch(recipeDetailUrl).then(function(response) {
       response.json().then(function(data) {
+
+        let jsonObject = data;
+        let jsonObjectStringify = JSON.stringify(jsonObject).replace(/<b>/g, "");
+        let newJsonObject = JSON.parse(jsonObjectStringify);
         
         $('#recipe-image').attr('src', data.image); // replace image
         $('#recipe-title').text(data.title);
+        $('#recipe-details').text(newJsonObject.summary);
+       // $('#recipe-ingredients').text(data.)
         console.log(data);
         }); 
       });
