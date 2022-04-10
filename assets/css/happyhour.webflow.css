@@ -120,6 +120,20 @@
   padding-top: 10px;
 }
 
+.new-suggestions {
+  position: absolute;
+  margin-left: 100px;
+}
+
+.new-suggestions.submit-button {
+  margin-top: 60px;
+  margin-left: 140px;
+}
+
+.new-suggestions.submit-button:hover {
+  background-color: #8b8b8b;
+}
+
 @media screen and (max-width: 479px) {
   .column {
     margin-top: 10px;
@@ -135,5 +149,9 @@
 
   .column-4 {
     padding-bottom: 10px;
+  }
+
+  .new-suggestions.submit-button {
+    margin-left: 70px;
   }
 }

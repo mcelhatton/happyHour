@@ -1,11 +1,24 @@
-header{
+body {
+    background-image: url(../images/AdobeStock_191626872_Preview.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0.85;
+}
+
+header {
     margin-bottom: 1em;
 }
 
-
-
-
-#previous-result{
+#previous-result {
     display: none;
+}
+
+.header {
+    background-color: white;
+    opacity: 0.8;
+}
+
+.container {
+
 }
 
