@@ -2,7 +2,7 @@ body {
     background-image: url(../images/AdobeStock_191626872_Preview.jpeg);
     background-repeat: no-repeat;
     background-size: cover;
-    opacity: 0.85;
+    opacity: 0.90;
 }
 
 header {
@@ -13,12 +13,18 @@ header {
     display: none;
 }
 
-.header {
+#hero {
     background-color: white;
-    opacity: 0.8;
+    opacity: 0.90;
 }
 
-.container {
+#container {
+    background-color: white;
+    opacity: 0.90;
+}
 
+#new-suggestions-btn {
+    margin-top: 50px;
+    margin-left: 50px;
 }
 
