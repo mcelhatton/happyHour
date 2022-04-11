@@ -1,17 +1,74 @@
+///// application variables
 
-// the movie DB api key
+let userSelectionForm = $('#wf-form-submitForm');
+let headerEl = $('#header');
+let heroEl = $('#hero');
+let modalEl = $('#modalwrapper');
+let modalSelectEl = $('#selectionwrapper')
+let containerEl = $('#container');
+let footerEl = $('#footer');
+let moveGenreSelect = $('#moveGenreSelect');
+let liquorSelect = $('#liquorSelect');
+let recipeSelect = $('#recipeSelect');
+
+///////// API KEYS
+
+// the movie DB api key https://developers.themoviedb.org/3/getting-started
 const movieApiKey = '42dbe956de7a0a7cd46f2c0cd6110ac2';
 
-// start movie api code //////////////////////////////////
-$('#movie-section').hide();
-$('#drinks-section').hide();
-// on page load fetch genre and load into dropdown list
-$( document ).ready(fetchGenres);
-//$( document ).ready(fetchRecipes);
+// recipe api key https://spoonacular.com/food-api/docs
+const recipeApiKey = 'aaa2f0547807454dbadffba65a6a4360';
 
+/// hide header, container and footer elements
+headerEl.hide();
+heroEl.hide();
+containerEl.hide();
+footerEl.hide();
+$( document ).ready(fetchGenres);
+
+/////  user selection from form submit pushed into apis 
+$('#wf-form-submitForm').submit(function(event){
+  event.preventDefault();
+
+  // hide modal show / suggestions
+  headerEl.show();
+  heroEl.show();
+  containerEl.show();
+  footerEl.show();
+  modalEl.hide();
+  modalSelectEl.hide();
+
+  ////// GET VALUE FROM MODAL MOVIE, DRINK AND RECIPE SELECTION
+  let movieSelection = moveGenreSelect.val();
+  let liquorSelection = liquorSelect.val();
+  let recipeSelection = recipeSelect.val();
+
+  /////// SAVE MOVIE, DRINK AND RECIPE SELECTION TO LOCAL STORAGE
+  localStorage.setItem('movieGenreSelect', movieGenreSelect);
+  localStorage.setItem('liquorSelect', liquorSelect);
+  localStorage.setItem('recipeSelect', recipeSelect);
+
+  console.log(movieSelection);
+  console.log(liquorSelection);
+  console.log(recipeSelection);
+
+  // fetch movie selection from form submit 
+  fetchMovies(movieGenreSelect);
+
+  // fetch drink selection from form submit
+  getDrink();
+
+  // fetch recipe selection from form submit
+  fetchRecipeDetails(recipeSelect);
+  
+  recipeSearch = $('#recipeSelect').val();
+    fetchRecipes(recipeSearch);
+});
+
+// get genres and load into dropdown select 
 function fetchGenres() {
 
-const genreApiUrl = 'https://api.themoviedb.org/3/genre/movie/list?api_key=42dbe956de7a0a7cd46f2c0cd6110ac2&language=en-US';
+  const genreApiUrl = 'https://api.themoviedb.org/3/genre/movie/list?api_key=42dbe956de7a0a7cd46f2c0cd6110ac2&language=en-US';
 
     fetch(genreApiUrl).then(function(response) {
       response.json().then(function(data) {
@@ -30,19 +87,11 @@ const genreApiUrl = 'https://api.themoviedb.org/3/genre/movie/list?api_key=42dbe
     for (i = 0; i < data.genres.length; i++) {
       id = data.genres[i].id;
       name = data.genres[i].name;
-      $('#field').append(`<option id="${id}">${name}</option>`);
+      $('#movieGenreSelect').append(`<option id="${id}">${name}</option>`);
     }
   }
 
-  $('#field').change(function(){
-    //const selected = $('#field').val().attr('id');
-    let selected = $(this).find('option:selected').attr('id');
-    localStorage.setItem('Selected', selected);
-    console.log(selected);
-    //let selection = selected.replace(/\D/g,'');
-    fetchMovies(selected);
-  });
-
+/////// FETCH MOVIE SELECTION
   function fetchMovies(selected) {
     const movieApiUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${movieApiKey}&with_genres=${selected}`;
 
@@ -51,14 +100,14 @@ const genreApiUrl = 'https://api.themoviedb.org/3/genre/movie/list?api_key=42dbe
         let randomNumber = ~~(Math.random() * 10);
         let moviePoster = data.results[randomNumber].poster_path;
         let moviePosterUrl = `https://image.tmdb.org/t/p/w500${moviePoster}`;
-        $('#movie-section').show();
         $('#movie-image').attr('src', moviePosterUrl);
         $('#movie-title').text(data.results[randomNumber].title);
-        $('#overview').text(data.results[randomNumber].overview);
+        $('#movie-details').text(data.results[randomNumber].overview);
         console.log(data);
         }); 
       });
   }
+
 // END movie api code //////////////////////////////////
 
 // Drinks code START
@@ -97,13 +146,14 @@ for (i in drinksData){
     .attr('value', drinkName)
     .text(drinkName);
 
-  $('#field-2').append(dropdownOption);
+  $('#liquorSelect').append(dropdownOption);
   
 }
 
+///  get drink suggestion 
 function getDrink(){
 
-  const selected = drinksData.find( ({ name }) => name === $('#field-2').val() );
+  const selected = drinksData.find( ({ name }) => name === $('#liquorSelect').val() );
   url = selected.url
 
   fetch(url).then(function(response) {
@@ -114,46 +164,17 @@ function getDrink(){
 
       $('#drink-image').attr('src', selectedDrink.strDrinkThumb); // replace image
       $('#drink-title').text(selectedDrink.strDrink); // replace drink name
-
-
-        // Save text when clicking save button
-
-          result['drink'] = $('#drink-title').text()
-          console.log(result)
   
     });
   });
 }
 
-// function saveObjectForResult{
-
-// }
-
 // END of drinks code
-
-
 
 previousResults = []
 
-// When main button is clicked, serve up movie and drink suggestions
-//$('#main-button').click(function(){
- // result = {}
- // getDrink()
-
   //saveResult();
   
-//})
-
-$('#field-2').change(function(){
-  const selected = $('#field-2').val();
-  localStorage.setItem('Selected', selected);
-  $('#drinks-section').show();
-  console.log(selected);
-  result = {};
-  getDrink();
-  
-});
-
 
 // Save to local storage
 var saveResult = function () {
@@ -161,13 +182,8 @@ var saveResult = function () {
 
 };
 
-const recipeApiKey = 'aaa2f0547807454dbadffba65a6a4360';
-
-let recipeSearch = '';
-
+/////// RECIPE API CODE START ////
 function fetchRecipes(){
-
-//const recipeApiUrl = `https://api.spoonacular.com/recipes/random?apiKey=${recipeApiKey}`;
 
 const recipeApiUrl = `https://api.spoonacular.com/recipes/search?query=${recipeSearch}&number=10&apiKey=${recipeApiKey}`;
   console.log(recipeApiUrl);
@@ -175,11 +191,14 @@ const recipeApiUrl = `https://api.spoonacular.com/recipes/search?query=${recipeS
       response.json().then(function(data) {
         console.log(data);
         
-          loadRecipeSelect(data);
+        let randomNumber = ~~(Math.random() * 10);
+        let randomRecipe = data.results[randomNumber].id;
+        fetchRecipeDetails(randomRecipe);
         
         }); 
       });
   }
+<<<<<<< HEAD
 
   $('#recipeSearchBtn').on('click', function(){
     recipeSearch = $('#recipeSearch').val();
@@ -208,13 +227,26 @@ const recipeApiUrl = `https://api.spoonacular.com/recipes/search?query=${recipeS
  
   function fetchRecipeDetails(selected) {
     const recipeDetailUrl = `https://api.spoonacular.com/recipes/${selected}/information?apiKey=${recipeApiKey}`;
+=======
+ ////// FETCH RECIPE DETAILS
+  function fetchRecipeDetails(randomRecipe) {
+    const recipeDetailUrl = `https://api.spoonacular.com/recipes/${randomRecipe}/information?apiKey=${recipeApiKey}`;
+>>>>>>> design
 
     fetch(recipeDetailUrl).then(function(response) {
       response.json().then(function(data) {
+
+        let jsonObject = data;
+        let jsonObjectStringify = JSON.stringify(jsonObject).replace(/<b>/g, "");
+        let newJsonObject = JSON.parse(jsonObjectStringify);
         
         $('#recipe-image').attr('src', data.image); // replace image
         $('#recipe-title').text(data.title);
+        $('#recipe-details').text(newJsonObject.summary);
+       // $('#recipe-ingredients').text(data.)
         console.log(data);
         }); 
       });
   }
+  
+  //// END RECIPE API CODE ///
