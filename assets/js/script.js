@@ -198,40 +198,9 @@ const recipeApiUrl = `https://api.spoonacular.com/recipes/search?query=${recipeS
         }); 
       });
   }
-<<<<<<< HEAD
-
-  $('#recipeSearchBtn').on('click', function(){
-    recipeSearch = $('#recipeSearch').val();
-    fetchRecipes(recipeSearch);
-  });
-  
-  function loadRecipeSelect(data) {
-    
-    let recipeTitle ='';
-    let recipeID = '';
-
-    for (i = 0; i < data.results.length; i++) {
-      recipeTitle = data.results[i].title;
-      recipeID = data.results[i].id;
-      console.log(recipeTitle,recipeID);
-      $('#field-3').append(`<option id="${recipeID}">${recipeTitle}</option>`);
-    }
-  }
-
-  $('#field-3').change(function(){
-    let selected = $(this).find('option:selected').attr('id');
-    localStorage.setItem('Selected', selected);
-    console.log(selected);
-    fetchRecipeDetails(selected);
-  });
- 
-  function fetchRecipeDetails(selected) {
-    const recipeDetailUrl = `https://api.spoonacular.com/recipes/${selected}/information?apiKey=${recipeApiKey}`;
-=======
  ////// FETCH RECIPE DETAILS
   function fetchRecipeDetails(randomRecipe) {
     const recipeDetailUrl = `https://api.spoonacular.com/recipes/${randomRecipe}/information?apiKey=${recipeApiKey}`;
->>>>>>> design
 
     fetch(recipeDetailUrl).then(function(response) {
       response.json().then(function(data) {
