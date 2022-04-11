@@ -1,6 +1,5 @@
 ///// application variables
 
-
 let userSelectionForm = $('#wf-form-submitForm');
 let headerEl = $('#header');
 let heroEl = $('#hero');
@@ -12,7 +11,6 @@ let moveGenreSelect = $('#moveGenreSelect');
 let liquorSelect = $('#liquorSelect');
 let recipeSelect = $('#recipeSelect');
 
-
 ///////// API KEYS
 
 // the movie DB api key
@@ -20,7 +18,6 @@ const movieApiKey = '42dbe956de7a0a7cd46f2c0cd6110ac2';
 
 // recipe api key
 const recipeApiKey = 'aaa2f0547807454dbadffba65a6a4360';
-
 
 /// hide header, container and footer elements
 headerEl.hide();
@@ -41,9 +38,19 @@ $('#wf-form-submitForm').submit(function(event){
   modalEl.hide();
   modalSelectEl.hide();
 
-  moveGenreSelect.val();
-  recipeSelect.val();
+  ////// GET VALUE FROM MODAL MOVIE, DRINK AND RECIPE SELECTION
+  let movieSelection = moveGenreSelect.val();
+  let liquorSelection = liquorSelect.val();
+  let recipeSelection = recipeSelect.val();
 
+  /////// SAVE MOVIE, DRINK AND RECIPE SELECTION TO LOCAL STORAGE
+  localStorage.setItem('movieGenreSelect', movieGenreSelect);
+  localStorage.setItem('liquorSelect', liquorSelect);
+  localStorage.setItem('recipeSelect', recipeSelect);
+
+  console.log(movieSelection);
+  console.log(liquorSelection);
+  console.log(recipeSelection);
 
   // fetch movie selection from form submit 
   fetchMovies(movieGenreSelect);
@@ -57,7 +64,6 @@ $('#wf-form-submitForm').submit(function(event){
   recipeSearch = $('#recipeSelect').val();
     fetchRecipes(recipeSearch);
 });
-
 
 // get genres and load into dropdown select 
 function fetchGenres() {
