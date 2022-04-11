@@ -13,10 +13,10 @@ let recipeSelect = $('#recipeSelect');
 
 ///////// API KEYS
 
-// the movie DB api key
+// the movie DB api key https://developers.themoviedb.org/3/getting-started
 const movieApiKey = '42dbe956de7a0a7cd46f2c0cd6110ac2';
 
-// recipe api key
+// recipe api key https://spoonacular.com/food-api/docs
 const recipeApiKey = 'aaa2f0547807454dbadffba65a6a4360';
 
 /// hide header, container and footer elements
@@ -26,11 +26,11 @@ containerEl.hide();
 footerEl.hide();
 $( document ).ready(fetchGenres);
 
+/////  user selection from form submit pushed into apis 
 $('#wf-form-submitForm').submit(function(event){
   event.preventDefault();
 
   // hide modal show / suggestions
-  
   headerEl.show();
   heroEl.show();
   containerEl.show();
@@ -68,7 +68,7 @@ $('#wf-form-submitForm').submit(function(event){
 // get genres and load into dropdown select 
 function fetchGenres() {
 
-const genreApiUrl = 'https://api.themoviedb.org/3/genre/movie/list?api_key=42dbe956de7a0a7cd46f2c0cd6110ac2&language=en-US';
+  const genreApiUrl = 'https://api.themoviedb.org/3/genre/movie/list?api_key=42dbe956de7a0a7cd46f2c0cd6110ac2&language=en-US';
 
     fetch(genreApiUrl).then(function(response) {
       response.json().then(function(data) {
@@ -150,6 +150,7 @@ for (i in drinksData){
   
 }
 
+///  get drink suggestion 
 function getDrink(){
 
   const selected = drinksData.find( ({ name }) => name === $('#liquorSelect').val() );
@@ -170,18 +171,10 @@ function getDrink(){
 
 // END of drinks code
 
-
-
 previousResults = []
-
-// When main button is clicked, serve up movie and drink suggestions
-//$('#main-button').click(function(){
- // result = {}
- // getDrink()
 
   //saveResult();
   
-//})
 
 // Save to local storage
 var saveResult = function () {
@@ -189,7 +182,7 @@ var saveResult = function () {
 
 };
 
-
+/////// RECIPE API CODE START ////
 function fetchRecipes(){
 
 const recipeApiUrl = `https://api.spoonacular.com/recipes/search?query=${recipeSearch}&number=10&apiKey=${recipeApiKey}`;
@@ -224,3 +217,5 @@ const recipeApiUrl = `https://api.spoonacular.com/recipes/search?query=${recipeS
         }); 
       });
   }
+  
+  //// END RECIPE API CODE ///
