@@ -48,10 +48,6 @@ $('#wf-form-submitForm').submit(function(event){
   localStorage.setItem('liquorSelect', liquorSelect);
   localStorage.setItem('recipeSelect', recipeSelect);
 
-  console.log(movieSelection);
-  console.log(liquorSelection);
-  console.log(recipeSelection);
-
   // fetch movie selection from form submit 
   fetchMovies(movieGenreSelect);
 
@@ -164,10 +160,34 @@ function getDrink(){
 
       $('#drink-image').attr('src', selectedDrink.strDrinkThumb); // replace image
       $('#drink-title').text(selectedDrink.strDrink); // replace drink name
+
+      let drinkID = selectedDrink.idDrink;
+      console.log(drinkID);
+      fetchDrinkDetails(drinkID);
   
     });
   });
 }
+////// FETCH DRINK DETAILS /////
+
+function fetchDrinkDetails(drinkID) {
+  const drinkDetailUrl = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${drinkID}`;
+
+  fetch(drinkDetailUrl).then(function(response) {
+    response.json().then(function(data) {
+
+      $('#drink-ingredients').empty();
+      
+      let ingredients = [data.drinks[0].strIngredient1,data.drinks[0].strIngredient2,data.drinks[0].strIngredient3,data.drinks[0].strIngredient4];
+     
+      for (i = 0; i < ingredients.length; i++) {
+        $('#drink-ingredients').append(`<li>${ingredients[i]}</li>`);
+      }
+     
+      }); 
+    });
+}
+
 
 // END of drinks code
 
@@ -219,3 +239,7 @@ const recipeApiUrl = `https://api.spoonacular.com/recipes/search?query=${recipeS
   }
   
   //// END RECIPE API CODE ///
+
+  
+
+  
