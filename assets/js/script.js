@@ -56,20 +56,8 @@ $('#wf-form-submitForm').submit(function(event){
   modalEl.hide();
   modalSelectEl.hide();
 
-<<<<<<< HEAD
    // Save to local storage and load previous results if there are any
   localStorageSaveAndLoad();
-=======
-  ////// GET VALUE FROM MODAL MOVIE, DRINK AND RECIPE SELECTION
-  let movieSelection = moveGenreSelect.val();
-  let liquorSelection = liquorSelect.val();
-  let recipeSelection = recipeSelect.val();
-
-  /////// SAVE MOVIE, DRINK AND RECIPE SELECTION TO LOCAL STORAGE
-  localStorage.setItem('movieGenreSelect', movieGenreSelect);
-  localStorage.setItem('liquorSelect', liquorSelect);
-  localStorage.setItem('recipeSelect', recipeSelect);
->>>>>>> design
 
   // fetch movie selection from form submit 
   fetchMovies(movieGenreSelect);
