@@ -110,7 +110,7 @@ function fetchGenres() {
 
 // END movie api code //////////////////////////////////
 
-// Drinks code START
+// Drinks code START TheCocktailDB.com /////////////////////
 
 drinksData = [
   {
