@@ -9,22 +9,25 @@ header {
     margin-bottom: 1em;
 }
 
-#previous-result {
-    display: none;
-}
-
 #hero {
     background-color: white;
     opacity: 0.90;
+
 }
+
 
 #container {
     background-color: white;
     opacity: 0.90;
+
 }
 
 #new-suggestions-btn {
     margin-top: 50px;
     margin-left: 50px;
+}
+
+.previous-result {
+    font-weight: normal;
 }
 

@@ -7,9 +7,27 @@ let modalEl = $('#modalwrapper');
 let modalSelectEl = $('#selectionwrapper')
 let containerEl = $('#container');
 let footerEl = $('#footer');
-let moveGenreSelect = $('#moveGenreSelect');
-let liquorSelect = $('#liquorSelect');
-let recipeSelect = $('#recipeSelect');
+let movieResult = $('#movie-title');
+let drinkResult = $('#drink-title');
+let recipeResult = $('#recipe-title');
+
+
+// Load local storage, or create variables if no local storage
+var loadResults = function () {
+  movieSelection = localStorage.getItem("movieSelection");
+  drinkSelection = localStorage.getItem("drinkSelection");
+  recipeSelection = localStorage.getItem("recipeSelection");
+
+  // if nothing in localStorage, create eventsArray to store
+  if (!movieSelection) {
+
+    movieSelection = "";
+    drinkSelection = "";
+    recipeSelection = "";
+  }
+};
+
+loadResults()
 
 ///////// API KEYS
 
@@ -38,19 +56,8 @@ $('#wf-form-submitForm').submit(function(event){
   modalEl.hide();
   modalSelectEl.hide();
 
-  ////// GET VALUE FROM MODAL MOVIE, DRINK AND RECIPE SELECTION
-  let movieSelection = moveGenreSelect.val();
-  let liquorSelection = liquorSelect.val();
-  let recipeSelection = recipeSelect.val();
-
-  /////// SAVE MOVIE, DRINK AND RECIPE SELECTION TO LOCAL STORAGE
-  localStorage.setItem('movieGenreSelect', movieGenreSelect);
-  localStorage.setItem('liquorSelect', liquorSelect);
-  localStorage.setItem('recipeSelect', recipeSelect);
-
-  console.log(movieSelection);
-  console.log(liquorSelection);
-  console.log(recipeSelection);
+   // Save to local storage and load previous results if there are any
+  localStorageSaveAndLoad();
 
   // fetch movie selection from form submit 
   fetchMovies(movieGenreSelect);
@@ -63,7 +70,38 @@ $('#wf-form-submitForm').submit(function(event){
   
   recipeSearch = $('#recipeSelect').val();
     fetchRecipes(recipeSearch);
+
 });
+
+ // Save and load local storage based on generated results
+function localStorageSaveAndLoad(){
+
+  // Get and save results to local storage
+  setTimeout(function(){ 
+    // Get text of results
+    let movieSelection = movieResult.text();
+    let drinkSelection = drinkResult.text();
+    let recipeSelection = recipeResult.text();
+
+    // Save results to local storage
+    localStorage.setItem('movieSelection', movieSelection);
+    localStorage.setItem('drinkSelection', drinkSelection);
+    localStorage.setItem('recipeSelection', recipeSelection);
+    
+  }, 8000) 
+
+  // Append data from local storage to previous results section
+  if (movieSelection == "" | drinkSelection == "" | recipeSelection == ""){
+    $('#previous-movie').append("n/a")
+    $('#previous-drink').append("n/a")
+    $('#previous-recipe').append("n/a")
+  }else{
+    $('#previous-movie').append(movieSelection)
+    $('#previous-drink').append(drinkSelection)
+    $('#previous-recipe').append(recipeSelection)
+  }
+
+}
 
 // get genres and load into dropdown select 
 function fetchGenres() {
@@ -90,6 +128,7 @@ function fetchGenres() {
       $('#movieGenreSelect').append(`<option id="${id}">${name}</option>`);
     }
   }
+
 
 /////// FETCH MOVIE SELECTION
   function fetchMovies(selected) {
@@ -171,16 +210,6 @@ function getDrink(){
 
 // END of drinks code
 
-previousResults = []
-
-  //saveResult();
-  
-
-// Save to local storage
-var saveResult = function () {
-  localStorage.setItem("eventsArray", JSON.stringify(previousResults));
-
-};
 
 /////// RECIPE API CODE START ////
 function fetchRecipes(){
