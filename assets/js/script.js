@@ -31,24 +31,26 @@ loadResults()
 
 ///////// API KEYS
 
-// the movie DB api key https://developers.themoviedb.org/3/getting-started
+// API #1 the movie DB api key https://developers.themoviedb.org/3/getting-started
 const movieApiKey = '42dbe956de7a0a7cd46f2c0cd6110ac2';
 
-// recipe api key https://spoonacular.com/food-api/docs
+// API #2 TheDrinkDB.COM No API key needed
+
+// API #3 recipe api key https://spoonacular.com/food-api/docs
 const recipeApiKey = 'aaa2f0547807454dbadffba65a6a4360';
 
-/// hide header, container and footer elements
+/// at start of application (page load) hide header, container and footer elements
 headerEl.hide();
 heroEl.hide();
 containerEl.hide();
 footerEl.hide();
 $( document ).ready(fetchGenres);
 
-/////  user selection from form submit pushed into apis 
+/////  Form and user selection from form submit pushed into apis 
 $('#wf-form-submitForm').submit(function(event){
   event.preventDefault();
 
-  // hide modal show / suggestions
+  // on submit hide modal show / suggestions
   headerEl.show();
   heroEl.show();
   containerEl.show();

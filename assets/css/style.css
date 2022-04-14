@@ -1,32 +1,34 @@
+/* BODY CSS */
 body {
     background-image: url(../images/AdobeStock_191626872.jpeg);
     background-repeat: no-repeat;
     background-size: cover;
     opacity: 0.90;
 }
-
+/* HEADER CSS */
 header {
     margin-bottom: 1em;
 }
-
+/* HERO CSS */
 #hero {
     background-color: white;
     opacity: 0.90;
-
 }
 
-
+/* MAIN CONTAINER CSS */
 #container {
     background-color: white;
     opacity: 0.90;
 
 }
 
+/* NEW SUGGESTIONS BUTTON CSS */
 #new-suggestions-btn {
     margin-top: 50px;
     margin-left: 50px;
 }
 
+/* PREVIOUS RESOLTS LOADED FROM LOCAL STORAGE SECTION CSS */
 .previous-result {
     font-weight: normal;
 }
