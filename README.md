@@ -2,7 +2,7 @@
 
 ## Description
 
-This program is designed ot help get users plan an amazing Date Night!  The application will give users a movie suggestion, drink suggestion and dinner suggestion to include recipes.
+This program is designed ot help users plan an amazing Date Night!  The application will give users a movie suggestion, drink suggestion and dinner suggestion including the recipe.
 
 ## Technologies Used
 
@@ -44,4 +44,4 @@ Users enter a movie genre, favorite liquor and dinner category they want and the
 
 ## Link to deployed page
 
-[Colin Code Quiz Link - Click here!]( https://mcelhatton.github.io/happyHour)
+[Date Night Link - Click here!]( https://mcelhatton.github.io/happyHour)
