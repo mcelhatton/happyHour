@@ -66,9 +66,6 @@ $('#wf-form-submitForm').submit(function(event){
 
   // fetch drink selection from form submit
   getDrink();
-
-  // fetch recipe selection from form submit
-  fetchRecipeDetails(recipeSelect);
   
   recipeSearch = $('#recipeSelect').val();
     fetchRecipes(recipeSearch);
@@ -236,15 +233,16 @@ function fetchDrinkDetails(drinkID) {
 
 
 /////// RECIPE API CODE START ////
-function fetchRecipes(){
+function fetchRecipes(recipeSearch){
 
 const recipeApiUrl = `https://api.spoonacular.com/recipes/search?query=${recipeSearch}&number=10&apiKey=${recipeApiKey}`;
-  console.log(recipeApiUrl);
+  
     fetch(recipeApiUrl).then(function(response) {
       response.json().then(function(data) {
         
         let randomNumber = ~~(Math.random() * 10);
         let randomRecipe = data.results[randomNumber].id;
+        
         fetchRecipeDetails(randomRecipe);
         
         }); 
@@ -252,6 +250,7 @@ const recipeApiUrl = `https://api.spoonacular.com/recipes/search?query=${recipeS
   }
  ////// FETCH RECIPE DETAILS
   function fetchRecipeDetails(randomRecipe) {
+   
     const recipeDetailUrl = `https://api.spoonacular.com/recipes/${randomRecipe}/information?apiKey=${recipeApiKey}`;
 
     fetch(recipeDetailUrl).then(function(response) {
