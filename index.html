@@ -21,13 +21,15 @@
       <div class="text-block">With everyone being busy these days and the added stress of the pandemic we&#x27;ve built you a tool to take the stress out of planning your next date night!<br><br>Tell us what you like and we will do the rest!</div>
       <div class="w-form">
         <form id="wf-form-submitForm" name="wf-form-submitForm" data-name="submitForm" method="get" class="form">
-          <select id="movieGenreSelect" name="movieGenreSelect" data-name="Movie Genre" class="select-field-4 w-select">
+          <select id="movieGenreSelect" name="movieGenreSelect" data-name="Movie Genre" class="select-field-4 w-select" required>
             <option value="">Select a movie genre...</option>
           </select>
-          <select id="liquorSelect" name="field-5" data-name="Field 5" class="select-field-5 w-select">
+          <select id="liquorSelect" name="field-5" data-name="Field 5" class="select-field-5 w-select" required >
             <option value="">Select your favorite liquor...</option>
           </select>
-          <input type="text" class="text-field-2 w-input" maxlength="256" name="recipe" data-name="recipe" placeholder="What sounds good for dinner?" id="recipeSelect" required=""><input type="submit" value="Get your suggestions now!" data-wait="Please wait..." class="submit-button w-button"></form>
+          <input type="text" class="text-field-2 w-input" maxlength="256" name="recipe" data-name="recipe" placeholder="What sounds good for dinner?" id="recipeSelect" required="">
+          <input type="submit" value="Get your suggestions now!" data-wait="Please wait..." class="submit-button w-button">
+        </form>
         <div class="w-form-done">
           <div>Thank you! Your submission has been received!</div>
         </div>

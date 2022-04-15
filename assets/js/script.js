@@ -61,15 +61,19 @@ $('#wf-form-submitForm').submit(function(event){
    // Save to local storage and load previous results if there are any
   localStorageSaveAndLoad();
 
-  // fetch movie selection from form submit 
-  fetchMovies(movieGenreSelect);
-
-  // fetch drink selection from form submit
-  getDrink();
+    /// take user input and push into the 3 api functions and check to make sure form is valid
+    $('#wf-form-submitForm').each(function(){
+    
+          // Movie function
+          fetchMovies(movieGenreSelect);
+          // drink function
+          getDrink();
+          // recipe function
+         recipeSearch = $('#recipeSelect').val();
+         fetchRecipes(recipeSearch);
+      
+    });
   
-  recipeSearch = $('#recipeSelect').val();
-    fetchRecipes(recipeSearch);
-
 });
 
  // Save and load local storage based on generated results
