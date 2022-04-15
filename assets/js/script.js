@@ -112,7 +112,6 @@ function fetchGenres() {
 
     fetch(genreApiUrl).then(function(response) {
       response.json().then(function(data) {
-        console.log(data);
         
           loadSelect(data);
         
@@ -144,7 +143,7 @@ function fetchGenres() {
         $('#movie-image').attr('src', moviePosterUrl);
         $('#movie-title').text(data.results[randomNumber].title);
         $('#movie-details').text(data.results[randomNumber].overview);
-        console.log(data);
+        
         }); 
       });
   }
@@ -201,13 +200,12 @@ function getDrink(){
     response.json().then(function(data) {
 
       selectedDrink = data.drinks[Math.floor(Math.random() * data.drinks.length)];
-      console.log(selectedDrink)
 
       $('#drink-image').attr('src', selectedDrink.strDrinkThumb); // replace image
       $('#drink-title').text(selectedDrink.strDrink); // replace drink name
 
       let drinkID = selectedDrink.idDrink;
-      console.log(drinkID);
+
       fetchDrinkDetails(drinkID);
   
     });
@@ -244,7 +242,6 @@ const recipeApiUrl = `https://api.spoonacular.com/recipes/search?query=${recipeS
   console.log(recipeApiUrl);
     fetch(recipeApiUrl).then(function(response) {
       response.json().then(function(data) {
-        console.log(data);
         
         let randomNumber = ~~(Math.random() * 10);
         let randomRecipe = data.results[randomNumber].id;
@@ -267,8 +264,7 @@ const recipeApiUrl = `https://api.spoonacular.com/recipes/search?query=${recipeS
         $('#recipe-image').attr('src', data.image); // replace image
         $('#recipe-title').text(data.title);
         $('#recipe-details').text(newJsonObject.summary.replaceAll('<b>', "").replaceAll('</b>', ""));
-       // $('#recipe-ingredients').text(data.)
-        console.log(data);
+       
         }); 
       });
   }
